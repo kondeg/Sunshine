@@ -149,7 +149,7 @@ public class TestProvider extends AndroidTestCase {
         // Get the joined Weather and Location data with a start date
         weatherCursor = mContext.getContentResolver().query(
                 WeatherEntry.buildWeatherLocationWithStartDate(
-                        TestDb.TEST_LOCATION, TestDb.TEST_DATE),
+                        TestDb.TEST_LOCATION, System.currentTimeMillis()),
                 null, // leaving "columns" null just returns all the columns.
                 null, // cols for "where" clause
                 null, // values for "where" clause
@@ -159,7 +159,7 @@ public class TestProvider extends AndroidTestCase {
 
         // Get the joined Weather data for a specific date
         weatherCursor = mContext.getContentResolver().query(
-                WeatherEntry.buildWeatherLocationWithDate(TestDb.TEST_LOCATION, TestDb.TEST_DATE),
+                WeatherEntry.buildWeatherLocationWithDate(TestDb.TEST_LOCATION, System.currentTimeMillis()),
                 null,
                 null,
                 null,
@@ -184,7 +184,7 @@ public class TestProvider extends AndroidTestCase {
         String testDate = "20140612";
         // content://com.example.android.sunshine.app/weather/94074/20140612
         type = mContext.getContentResolver().getType(
-                WeatherEntry.buildWeatherLocationWithDate(testLocation, testDate));
+                WeatherEntry.buildWeatherLocationWithDate(testLocation, System.currentTimeMillis()));
         // vnd.android.cursor.item/com.example.android.sunshine.app/weather
         assertEquals(WeatherEntry.CONTENT_ITEM_TYPE, type);
 
@@ -256,7 +256,7 @@ public class TestProvider extends AndroidTestCase {
     static ContentValues createKalamazooWeatherValues(long locationRowId) {
         ContentValues weatherValues = new ContentValues();
         weatherValues.put(WeatherEntry.COLUMN_LOC_KEY, locationRowId);
-        weatherValues.put(WeatherEntry.COLUMN_DATETEXT, KALAMAZOO_WEATHER_START_DATE);
+      //  weatherValues.put(WeatherEntry.COLUMN_DATETEXT, KALAMAZOO_WEATHER_START_DATE);
         weatherValues.put(WeatherEntry.COLUMN_DEGREES, 1.2);
         weatherValues.put(WeatherEntry.COLUMN_HUMIDITY, 1.5);
         weatherValues.put(WeatherEntry.COLUMN_PRESSURE, 1.1);
